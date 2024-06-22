@@ -75,7 +75,8 @@ async function getEvents() {
 
 async function getOthers() {
     try {
-        const res = await fetch(`https://api.airtable.com/v0/${airtableBaseId}/${airtableTableOthersId}?view=${airtableTableOthersViewId}`, {
+        //`https://api.airtable.com/v0/${airtableBaseId}/${airtableTableOthersId}?view=${airtableTableOthersViewId}`
+        const res = await fetch(`https://api.airtable.com/v0/${airtableBaseId}/${airtableTableOthersId}`, {
             headers: {
                 Authorization: `Bearer ${airtableApiKey}`,
             },
