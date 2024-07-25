@@ -83,12 +83,13 @@ async function getOthers() {
             cache: 'no-store'
         });
         const data = await res.json();
-        //console.log('all others', data)
+        // console.log('all others', data)
         return data.records
     } catch (error) {
         console.log(error);
     }
 }
+
 
 const Dynamicp5TestTwo = dynamic(
     () => import('./Testp5Two/Testp5Two'),
@@ -134,7 +135,7 @@ export default async function HomeView({ language }) {
             <div className='w-full min-h-screen flex flex-col justify-center isolate relative z-[60]'>
                 <LanguageSelect />
                 <div className="py-10 mix-blend text-shadow">
-                    <Dynamicp5TestTwo />
+                    {/* <Dynamicp5TestTwo /> */}
                     <h1 className={`text-center text-h1 font-special text-primary ${language === 'tw' ? 'font-semibold' : ''}`}>{websiteGlobalFields[`Theme_${language}`]}</h1>
                     {heroText.map((text, i)=> <h1 className={`text-center text-h1 font-special ${language === 'tw' && (i === 0 ) ? 'font-semibold' : ''}`}>{text}</h1>)}
                 </div>
@@ -169,11 +170,9 @@ export default async function HomeView({ language }) {
                     )}
                 </div>
 
-                {/* ALL Events  */}
                 <SectionTitle content={eventSectionTitle}></SectionTitle>
                 <Events events={otherEvents}language={language} />
 
-                {/* ALL Sponsors  */}
                 <SectionTitle content={sponsorSectionTitle}></SectionTitle>
                 <Sponsors language={language} sponsors={sponsors} />
 
