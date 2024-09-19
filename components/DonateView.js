@@ -26,8 +26,8 @@ async function getOthers() {
 export default async function DonateView({ language }) {
     const CopyBank = dynamic(() => import("./Bank"), { ssr: false })
     const others = await getOthers()
-    const donate = others.filter(data => data.fields['Type'] === 'Donate-Info')
-    const websiteGlobal = others.filter(data => data.fields['Type'] === 'Website')[0]
+    const donate = others?.filter(data => data.fields['Type'] === 'Donate-Info')
+    const websiteGlobal = others?.filter(data => data.fields['Type'] === 'Website')[0]
     const { GoogleCalendarUrl } = websiteGlobal.fields
     return(
         <>

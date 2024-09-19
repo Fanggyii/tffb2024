@@ -31,7 +31,7 @@ export default async function AboutView({ language }) {
     const marquee = others?.filter(data => data.fields['Type'] === 'Donate-Float').map(marquee => marquee.fields[`Title_${language}`]).join('');
     const team = others?.filter(data => data.fields['Type'] === 'Team')
     const websiteGlobal = others?.filter(data => data.fields['Type'] === 'Website')[0]
-    const { GoogleCalendarUrl } = websiteGlobal?.fields
+    const GoogleCalendarUrl = websiteGlobal?.fields?.GoogleCalendarUrl ?? 'https://google.com';
     const sectionText = sectionTitles[language] 
     return (
         <>
