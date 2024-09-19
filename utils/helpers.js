@@ -34,12 +34,12 @@ export const convertToEmbedURL = (originalURL) => {
     const videoIDPattern = /(?:\/|%3D|v=|vi=)([0-9A-Za-z_-]{11})(?:[%#?&]|$)/;
   
     // Check if the input URL is already an embed URL
-    if (originalURL.includes("youtube.com/embed/")) {
+    if (originalURL?.includes("youtube.com/embed/")) {
       return originalURL;
     }
   
     // Match the video ID from the original URL using the regex pattern
-    const match = originalURL.match(videoIDPattern);
+    const match = originalURL?.match(videoIDPattern);
   
     if (match && match[1]) {
       // If a match is found, construct the embed URL with the video ID
@@ -55,7 +55,7 @@ export const metaKeywords = ['Berlin', 'film', 'festival', 'film festival', 'Tai
 
 export const sectionTitles = {
     en: {
-        siteTitle: '6th Taiwan Film Festival Berlin',
+        siteTitle: '7th Taiwan Film Festival Berlin',
         description: 'Home, Wherever',
         aboutSectionTitle: 'ABOUT THIS YEAR',
         filmSectionTitle: 'ALL FILMS',
@@ -87,7 +87,7 @@ export const sectionTitles = {
         calendarShowMore: 'more'
     },
     de: {
-        siteTitle: '6th Taiwan Film Festival Berlin',
+        siteTitle: '7th Taiwan Film Festival Berlin',
         description: 'Zuhause, Wo Auch Immer',
         aboutSectionTitle: 'UEBER DIESES JAHR',
         filmSectionTitle: 'ALLE FILME',
@@ -119,7 +119,7 @@ export const sectionTitles = {
         calendarShowMore: 'weitere'
     },
     tw: {
-        siteTitle: '第六屆柏林臺灣影展',
+        siteTitle: '第七屆柏林臺灣影展',
         description: '家，在四方',
         aboutSectionTitle: '關於今年',
         filmSectionTitle: '所有電影',

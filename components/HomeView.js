@@ -107,7 +107,9 @@ export default async function HomeView({ language }) {
     const filmEvents = await getFilmEvents()
     for (let film of films.records) {
         const filmId = film.id
-        const eventsOfFilm = filmEvents.filter(event => event.fields.Film[0] === filmId)
+        const eventsOfFilm = filmEvents.filter(event => 
+            event.fields.Film && event.fields.Film[0] && event.fields.Film[0] === filmId
+        )
         film.fields['Events'] = eventsOfFilm
         allEvents = [...allEvents, ...eventsOfFilm, film]
     }
@@ -135,7 +137,7 @@ export default async function HomeView({ language }) {
             <div className='w-full min-h-screen flex flex-col justify-center isolate relative z-[60]'>
                 <LanguageSelect />
                 <div className="py-10 mix-blend text-shadow">
-                    {/* <Dynamicp5TestTwo /> */}
+                    {/*<Dynamicp5TestTwo /> */}
                     <h1 className={`text-center text-h1 font-special text-primary ${language === 'tw' ? 'font-semibold' : ''}`}>{websiteGlobalFields[`Theme_${language}`]}</h1>
                     {heroText.map((text, i)=> <h1 className={`text-center text-h1 font-special ${language === 'tw' && (i === 0 ) ? 'font-semibold' : ''}`}>{text}</h1>)}
                 </div>
@@ -160,13 +162,13 @@ export default async function HomeView({ language }) {
 
                 <div className=''>
                     {films.records.map(film =>
-                        !isEmpty(film.fields) && <Film
+                        !isEmpty(film.fields) && 
+                        <Film
                             key={film.id}
                             id={film.id}
                             language={language}
                             film={film.fields}
-                        >
-                        </Film>
+                        />
                     )}
                 </div>
 
@@ -184,7 +186,10 @@ export default async function HomeView({ language }) {
                 
                 <Calendar events={allEvents} language={language}/>
                 <Footer language={language} googleCalendar={GoogleCalendarUrl}/>
-            </section>
+            </section> 
+
         </div>
     )
 }
+
+

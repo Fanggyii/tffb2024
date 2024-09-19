@@ -30,7 +30,7 @@ export default function Film(props) {
     // dropbox image url replacement
     MainImageUrl = dropboxUrl(MainImageUrl);
     DirectorImageUrl = dropboxUrl(DirectorImageUrl);
-    SubImageUrls = SubImageUrls.split('\n').map(url => dropboxUrl(url))
+    SubImageUrls = SubImageUrls?.split('\n').map(url => dropboxUrl(url))
     const name = film[`FilmName_${language}`]
     const director = film[`Director_${language}`]
     const synopsis = film[`Synopsis_${language}`]
@@ -42,7 +42,7 @@ export default function Film(props) {
     let prizes = film[`Prize_Nomination_${language}`]
 
     // let isOpeningFilm = film.isOpeningFilm
-    prizes = prizes.split('\n')
+    prizes = prizes?.split('\n')
     const { year, month, day, hour, minute } = formatBerlinTime(ScreenTime)
 
     return (
