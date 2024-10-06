@@ -110,12 +110,12 @@ const Dynamicp5TestTwo = dynamic(() => import('./Testp5Two/Testp5Two'), {
 
 export default async function HomeView({ language }) {
 	const otherEvents = await getEvents();
-	let allEvents = [...otherEvents.filter((evt) => evt.fields.ShowInCalendar)];
+	let allEvents = [...otherEvents?.filter((evt) => evt.fields?.ShowInCalendar)];
 	let films = await getFilms();
 	const filmEvents = await getFilmEvents();
 	for (let film of films.records) {
 		const filmId = film.id;
-		const eventsOfFilm = filmEvents.filter((event) => {
+		const eventsOfFilm = filmEvents?.filter((event) => {
 			return event.fields?.Film?.[0] === filmId;
 		});
 		film.fields['Events'] = eventsOfFilm;
@@ -124,11 +124,11 @@ export default async function HomeView({ language }) {
 	console.log('all event count', allEvents.length);
 	const others = await getOthers();
 	const marquee = others
-		.filter((data) => data.fields['Type'] === 'Donate-Float')
+		?.filter((data) => data.fields['Type'] === 'Donate-Float')
 		.map((marquee) => marquee.fields[`Title_${language}`])
 		.join('');
 	const sponsors = others
-		.filter((data) => data.fields['Type'] === 'Sponsor')
+		?.filter((data) => data.fields['Type'] === 'Sponsor')
 		.map((sponsor) => {
 			sponsor.fields['Img'] = sponsor.fields['Img']
 				? dropboxUrl(sponsor.fields['Img'])
@@ -136,18 +136,20 @@ export default async function HomeView({ language }) {
 			return sponsor;
 		});
 	const partners = others
-		.filter((data) => data.fields['Type'] === 'Partner')
+		?.filter((data) => data.fields['Type'] === 'Partner')
 		.map((sponsor) => {
 			sponsor.fields['Img'] = sponsor.fields['Img']
 				? dropboxUrl(sponsor.fields['Img'])
 				: 'hi';
 			return sponsor;
 		});
-	const questions = others.filter((data) => data.fields['Type'] === 'Question');
-	const websiteGlobal = others.filter(
+	const questions = others?.filter(
+		(data) => data.fields['Type'] === 'Question'
+	);
+	const websiteGlobal = others?.filter(
 		(data) => data.fields['Type'] === 'Website'
 	)[0];
-	const aboutThisYear = others.filter(
+	const aboutThisYear = others?.filter(
 		(data) => data.fields['Type'] === 'About-This-Year'
 	);
 	const websiteGlobalFields = websiteGlobal.fields;
