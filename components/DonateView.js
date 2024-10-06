@@ -41,7 +41,7 @@ export default async function DonateView({ language }) {
 			<LanguageSelect link={['/donate', '/de/donate', '/tw/donate']} />
 			<section className='max-w-1440 mx-auto px-[5vw]'>
 				<BackHome link={`/${language}`} language={language} />
-				<CopyBank bank={donate[0]} language={language} />
+				<CopyBank bank={donate?.[0]} language={language} />
 				<Footer language={language} googleCalendar={GoogleCalendarUrl} />
 			</section>
 		</>
