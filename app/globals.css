@@ -3,148 +3,161 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'Terminal Grotesque';
-    src: url('../fonts/terminal-grotesque-webfont.woff') format('woff2'),
-        url('../fonts/terminal-grotesque-webfont.woff') format('woff'),
-        url('../fonts/terminal-grotesque-webfont.ttf') format('truetype');
+	font-family: 'Terminal Grotesque';
+	src: url('../fonts/terminal-grotesque-webfont.woff') format('woff2'),
+		url('../fonts/terminal-grotesque-webfont.woff') format('woff'),
+		url('../fonts/terminal-grotesque-webfont.ttf') format('truetype');
 }
 
-.hidden{
-    display: none;
+@font-face {
+	font-family: 'Puffling';
+	src: url('../fonts/puffling/puffling-medium-regular.woff2') format('woff2');
 }
 
-.top{
-    position:absolute;
-    inset: 0;
+@font-face {
+	font-family: 'Gaya';
+	src: url('../fonts/gaya/gaya-regular.woff2') format('woff2');
 }
 
-#content, #billy {
-    opacity: 0;
-    animation: fadeIn 2s ease-in-out forwards 1s;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+.hidden {
+	display: none;
+}
 
-.p5Canvas{
-    z-index:49;
-    position:absolute;
-    top:0;
-    left:0;
-    pointer-events: none;
-    /* mix-blend-mode: screen; */
+.top {
+	position: absolute;
+	inset: 0;
+}
+
+#content,
+#billy {
+	opacity: 0;
+	animation: fadeIn 2s ease-in-out forwards 1s;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.p5Canvas {
+	z-index: 49;
+	position: absolute;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	/* mix-blend-mode: screen; */
 }
 
 .text-shadow {
-    text-shadow: 3px 1.5px 1px #FFF;
+	text-shadow: 3px 1.5px 1px #fff;
 }
 
 .marquee {
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    position: fixed;
-    bottom: 0;
-    z-index: 60;
-    background-color: #000;
-    color: #fff;
-    font-family: sans-serif;
-    padding: 15px 0px;
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	position: fixed;
+	bottom: 0;
+	z-index: 60;
+	background-color: #000;
+	color: #fff;
+	font-family: sans-serif;
+	padding: 15px 0px;
 }
 
 .marquee span {
-    display: inline-block;
-    animation: marquee 50s linear infinite;
-    color: #fff;
+	display: inline-block;
+	animation: marquee 50s linear infinite;
+	color: #fff;
 }
 
 @keyframes marquee {
-    0% {
-        transform: translateX(100vw);
-    }
+	0% {
+		transform: translateX(100vw);
+	}
 
-    100% {
-        transform: translateX(-100%);
-    }
+	100% {
+		transform: translateX(-100%);
+	}
 }
 
 /* Optional: Add styles for links */
 .marquee a {
-    color: #fff;
-    text-decoration: none;
+	color: #fff;
+	text-decoration: none;
 }
 
 .marquee a:hover {
-    color: #eee;
-    text-decoration: underline;
+	color: #eee;
+	text-decoration: underline;
 }
 
 .noPointer {
-    pointer-events: none;
+	pointer-events: none;
 }
 
 .mix {
-    mix-blend-mode: difference;
-    transform: translate3d(0, 0, 0);
+	mix-blend-mode: difference;
+	transform: translate3d(0, 0, 0);
 }
 
 .isolate {
-    isolation: isolate;
+	isolation: isolate;
 }
 
 :visited {
-    background-color: #D6366F;
+	background-color: #d6366f;
 }
 
 a:hover {
-    color: #ccc;
-    cursor: pointer;
+	color: #ccc;
+	cursor: pointer;
+	transition: color 200ms ease-in;
 }
 
 .richtext {
-    pointer-events: none;
+	pointer-events: none;
 }
 
 .richtext p:not(:last-child) {
-    margin-bottom: 1rem;
+	margin-bottom: 1rem;
 }
 
 .richtext p {
-    text-align: justify;
+	text-align: justify;
 }
 
 .richtext a {
-    pointer-events: auto;
-    text-decoration: underline;
+	pointer-events: auto;
+	text-decoration: underline;
 }
 
 @media (min-width: 768px) {
-    .social:first-child::before, .social:last-child::after {
-        content: "";
-        display: block;
-        width: 30%;
-        height: 1px;
-        background: #000;
-        top: 50%;
-        position: absolute;
-    }
-    .socials .social:first-child::before {
-       left: 0;
-    }
-    .socials .social:last-child::after {
-        right: 0;
-    }
+	.social:first-child::before,
+	.social:last-child::after {
+		content: '';
+		display: block;
+		width: 30%;
+		height: 1px;
+		background: #000;
+		top: 50%;
+		position: absolute;
+	}
+	.socials .social:first-child::before {
+		left: 0;
+	}
+	.socials .social:last-child::after {
+		right: 0;
+	}
 }
 
 @media (min-width: 1024px) {
-    .social:first-child::before, .social:last-child::after {
-        width: 37%;
-    }
+	.social:first-child::before,
+	.social:last-child::after {
+		width: 37%;
+	}
 }
-
