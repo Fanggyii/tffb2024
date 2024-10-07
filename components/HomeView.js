@@ -148,6 +148,7 @@ export default async function HomeView({ language }) {
 	const sponsors = others
 		.filter((data) => data?.fields?.['Type'] === 'Sponsor')
 		.map((sponsor) => {
+			sponsor.fields = sponsor.fields || {}; // Ensure sponsor.fields exists
 			sponsor.fields['Img'] = sponsor.fields['Img']
 				? dropboxUrl(sponsor.fields['Img'])
 				: 'hi';
@@ -158,6 +159,7 @@ export default async function HomeView({ language }) {
 	const partners = others
 		.filter((data) => data?.fields?.['Type'] === 'Partner')
 		.map((partner) => {
+			partner.fields = partner.fields || {}; // Ensure partner.fields exists
 			partner.fields['Img'] = partner.fields['Img']
 				? dropboxUrl(partner.fields['Img'])
 				: 'hi';
@@ -200,7 +202,7 @@ export default async function HomeView({ language }) {
 
 	return (
 		<div id='content' className='relative'>
-			<div className='w-full min-h-screen flex flex-col justify-center isolate relative z-[60]'>
+			<div className='w-full micn-h-screen flex flex-col justify-center isolate relative z-[60]'>
 				<LanguageSelect />
 				<div className='py-10 mix-blend text-shadow'>
 					{/*<Dynamicp5TestTwo /> */}
@@ -211,15 +213,16 @@ export default async function HomeView({ language }) {
 					>
 						{websiteGlobalFields[`Theme_${language}`]}
 					</h1>
-					{heroText.map((text, i) => (
-						<h1
-							className={`text-center text-h1 font-puffling ${
-								language === 'tw' && i === 0 ? 'font-semibold' : ''
-							}`}
-						>
-							{text}
-						</h1>
-					))}
+					{heroText &&
+						heroText.map((text, i) => (
+							<h1
+								className={`text-center text-h1 font-puffling ${
+									language === 'tw' && i === 0 ? 'font-semibold' : ''
+								}`}
+							>
+								{text}
+							</h1>
+						))}
 				</div>
 				<div className='text-center z-50'>
 					<Modal
@@ -239,31 +242,33 @@ export default async function HomeView({ language }) {
 					img='../img/banner-2024.jpg'
 				/>
 				<div>
-					{aboutThisYear.map((obj) => (
-						<div key={obj.id} className='my-4'>
-							<h2 className='text-center font-gaya text-h2 font-semibold mb-2'>
-								{obj.fields[`Question_${language}`]}
-							</h2>
-							<div>
-								<RichText content={obj.fields[`Answer_${language}`]} />
+					{aboutThisYear &&
+						aboutThisYear.map((obj) => (
+							<div key={obj.id} className='my-4'>
+								<h2 className='text-center font-gaya text-h2 font-semibold mb-2'>
+									{obj.fields[`Question_${language}`]}
+								</h2>
+								<div>
+									<RichText content={obj.fields[`Answer_${language}`]} />
+								</div>
 							</div>
-						</div>
-					))}
+						))}
 				</div>
 				<SectionTitle content={filmSectionTitle}></SectionTitle>
 
 				<div className=''>
-					{films.records.map(
-						(film) =>
-							!isEmpty(film.fields) && (
-								<Film
-									key={film.id}
-									id={film.id}
-									language={language}
-									film={film.fields}
-								/>
-							)
-					)}
+					{films.records &&
+						films.records.map(
+							(film) =>
+								!isEmpty(film.fields) && (
+									<Film
+										key={film.id}
+										id={film.id}
+										language={language}
+										film={film.fields}
+									/>
+								)
+						)}
 				</div>
 
 				<SectionTitle content={eventSectionTitle}></SectionTitle>
