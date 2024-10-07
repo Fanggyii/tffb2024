@@ -35,7 +35,7 @@ export default async function DonateView({ language }) {
 	const websiteGlobal = others?.filter(
 		(data) => data.fields?.['Type'] === 'Website'
 	)[0];
-	const { GoogleCalendarUrl } = websiteGlobal?.fields;
+	const { GoogleCalendarUrl } = websiteGlobal?.fields ?? '';
 	return (
 		<>
 			<LanguageSelect link={['/donate', '/de/donate', '/tw/donate']} />
