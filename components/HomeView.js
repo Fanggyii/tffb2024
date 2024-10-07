@@ -124,8 +124,9 @@ export default async function HomeView({ language }) {
 		allEvents = [...allEvents, ...eventsOfFilm, film];
 	}
 	const others = await getOthers();
-	const marquee = others
-		.filter((data) => data.fields['Type'] === 'Donate-Float')
+	const marquee = (
+		others?.filter((data) => data.fields['Type'] === 'Donate-Float') || []
+	)
 		.map((marquee) => marquee.fields[`Title_${language}`])
 		.join('');
 	const sponsors = others
