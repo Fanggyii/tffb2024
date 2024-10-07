@@ -106,64 +106,94 @@ const Dynamicp5TestTwo = dynamic(() => import('./Testp5Two/Testp5Two'), {
 });
 
 export default async function HomeView({ language }) {
-	const otherEvents = await getEvents();
+	const otherEvents = (await getEvents()) || []; // Ensure otherEvents is an array
 	let allEvents = [
-		...(otherEvents?.filter((evt) => evt.fields.ShowInCalendar) || []),
+		...(otherEvents?.filter((evt) => evt?.fields?.ShowInCalendar) || []), // Safeguard field access with optional chaining
 	];
-	let films = await getFilms();
-	const filmEvents = await getFilmEvents();
+
+	let films = (await getFilms()) || {}; // Ensure films is an object
+	const filmEvents = (await getFilmEvents()) || []; // Ensure filmEvents is an array
+
+	// Safely iterate over films.records
 	for (let film of films?.records || []) {
-		const filmId = film.id;
-		const eventsOfFilm = filmEvents.filter(
+		const filmId = film?.id; // Ensure film and film.id are valid
+		if (!filmId) continue; // Skip iteration if filmId is undefined
+
+		// Safely filter filmEvents
+		const eventsOfFilm = (filmEvents || []).filter(
 			(event) =>
-				event.fields.Film &&
+				event?.fields?.Film && // Ensure event.fields.Film exists
 				event.fields.Film[0] &&
 				event.fields.Film[0] === filmId
 		);
+
+		// Ensure film.fields is an object and assign 'Events'
+		film.fields = film.fields || {};
 		film.fields['Events'] = eventsOfFilm;
+
+		// Add eventsOfFilm and film to allEvents
 		allEvents = [...allEvents, ...eventsOfFilm, film];
 	}
-	const others = await getOthers();
+
+	const others = (await getOthers()) || []; // Ensure others is an array
+
+	// Safeguard marquee processing
 	const marquee = (
-		others?.filter((data) => data.fields['Type'] === 'Donate-Float') || []
+		others?.filter((data) => data?.fields?.['Type'] === 'Donate-Float') || []
 	)
-		.map((marquee) => marquee.fields[`Title_${language}`])
+		.map((marquee) => marquee?.fields?.[`Title_${language}`] || '') // Handle missing fields
 		.join('');
+
+	// Safeguard sponsors processing
 	const sponsors = others
-		.filter((data) => data.fields['Type'] === 'Sponsor')
+		.filter((data) => data?.fields?.['Type'] === 'Sponsor')
 		.map((sponsor) => {
 			sponsor.fields['Img'] = sponsor.fields['Img']
 				? dropboxUrl(sponsor.fields['Img'])
 				: 'hi';
 			return sponsor;
 		});
+
+	// Safeguard partners processing
 	const partners = others
-		.filter((data) => data.fields['Type'] === 'Partner')
-		.map((sponsor) => {
-			sponsor.fields['Img'] = sponsor.fields['Img']
-				? dropboxUrl(sponsor.fields['Img'])
+		.filter((data) => data?.fields?.['Type'] === 'Partner')
+		.map((partner) => {
+			partner.fields['Img'] = partner.fields['Img']
+				? dropboxUrl(partner.fields['Img'])
 				: 'hi';
-			return sponsor;
+			return partner;
 		});
-	const questions = others.filter((data) => data.fields['Type'] === 'Question');
-	const websiteGlobal = others.filter(
-		(data) => data.fields['Type'] === 'Website'
-	)[0];
-	const aboutThisYear = others.filter(
-		(data) => data.fields['Type'] === 'About-This-Year'
-	);
-	const websiteGlobalFields = websiteGlobal.fields;
-	const heroText = websiteGlobalFields[`Title_${language}`].split('\n');
-	const { VenueLink, TrailerLink, GoogleCalendarUrl } = websiteGlobalFields;
-	const sectionText = sectionTitles[language];
+
+	// Safeguard questions processing
+	const questions =
+		others?.filter((data) => data?.fields?.['Type'] === 'Question') || [];
+
+	// Safeguard websiteGlobal and ensure it exists before accessing fields
+	const websiteGlobal =
+		others.find((data) => data?.fields?.['Type'] === 'Website') || {};
+	const websiteGlobalFields = websiteGlobal?.fields || {};
+
+	// Safeguard heroText generation
+	const heroText = websiteGlobalFields[`Title_${language}`]?.split('\n') || [];
+
+	// Safeguard destructuring and assign default values
 	const {
-		filmSectionTitle,
-		aboutSectionTitle,
-		eventSectionTitle,
-		sponsorSectionTitle,
-		partnerSectionTitle,
-		questionSectionTitle,
+		VenueLink = '',
+		TrailerLink = '',
+		GoogleCalendarUrl = '',
+	} = websiteGlobalFields;
+
+	// Safeguard section titles and assign default values
+	const sectionText = sectionTitles[language] || {};
+	const {
+		filmSectionTitle = '',
+		aboutSectionTitle = '',
+		eventSectionTitle = '',
+		sponsorSectionTitle = '',
+		partnerSectionTitle = '',
+		questionSectionTitle = '',
 	} = sectionText;
+
 	return (
 		<div id='content' className='relative'>
 			<div className='w-full min-h-screen flex flex-col justify-center isolate relative z-[60]'>
