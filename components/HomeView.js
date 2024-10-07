@@ -194,6 +194,10 @@ export default async function HomeView({ language }) {
 		questionSectionTitle = '',
 	} = sectionText;
 
+	const aboutThisYear =
+		others?.filter((data) => data?.fields?.['Type'] === 'About-This-Year') ||
+		[];
+
 	return (
 		<div id='content' className='relative'>
 			<div className='w-full min-h-screen flex flex-col justify-center isolate relative z-[60]'>
