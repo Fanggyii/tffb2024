@@ -109,7 +109,9 @@ const Dynamicp5TestTwo = dynamic(() => import('./Testp5Two/Testp5Two'), {
 
 export default async function HomeView({ language }) {
 	const otherEvents = await getEvents();
-	let allEvents = [...otherEvents.filter((evt) => evt.fields.ShowInCalendar)];
+	let allEvents = [
+		...(otherEvents?.filter((evt) => evt.fields.ShowInCalendar) || []),
+	];
 	let films = await getFilms();
 	const filmEvents = await getFilmEvents();
 	for (let film of films.records) {
