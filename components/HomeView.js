@@ -57,7 +57,6 @@ async function getFilms() {
 			}
 		);
 		const data = await res.json();
-		//console.log('data records', data.records[0]);
 		return data;
 	} catch (error) {
 		return [];
@@ -76,7 +75,6 @@ async function getEvents() {
 			}
 		);
 		const data = await res.json();
-		//console.log('events', data.records)
 		return data.records;
 	} catch (error) {
 		return [];
@@ -114,7 +112,7 @@ export default async function HomeView({ language }) {
 	];
 	let films = await getFilms();
 	const filmEvents = await getFilmEvents();
-	for (let film of films.records) {
+	for (let film of films?.records || []) {
 		const filmId = film.id;
 		const eventsOfFilm = filmEvents.filter(
 			(event) =>
