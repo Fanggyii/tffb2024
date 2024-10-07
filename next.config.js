@@ -4,6 +4,4 @@ module.exports = {
 	sassOptions: {
 		includePaths: [path.join(__dirname, 'styles')],
 	},
-	reactStrictMode: false,
-	eslint: { ignoreDuringBuilds: true },
 };
