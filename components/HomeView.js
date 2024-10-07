@@ -205,7 +205,7 @@ export default async function HomeView({ language }) {
 				<SpecialTitle
 					year={websiteGlobalFields['Year']}
 					title={aboutSectionTitle}
-					img='../img/hero2Img.png'
+					img='../img/banner-2024.jpg'
 				/>
 				<div>
 					{aboutThisYear?.map((obj) => (
