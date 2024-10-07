@@ -34,7 +34,7 @@ export default async function DonateView({ language }) {
 	);
 	const websiteGlobal = others?.filter(
 		(data) => data.fields?.['Type'] === 'Website'
-	)[0];
+	)?.[0];
 	const { GoogleCalendarUrl } = websiteGlobal?.fields ?? '';
 	return (
 		<>
