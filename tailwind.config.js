@@ -49,7 +49,7 @@ module.exports = {
 				// Add more custom font families as needed
 			},
 			colors: {
-				primary: '#D6366F',
+				primary: '#E73440',
 				secondary: '#0F2537',
 				tertiary: '#D8DF50',
 				material: '#FFE1E6',

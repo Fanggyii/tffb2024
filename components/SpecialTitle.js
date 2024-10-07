@@ -6,7 +6,7 @@ export default function SpecialTitle(props) {
 
 	return (
 		<section className='flex flex-col gap-10'>
-			<div className='flex flex-col md:flex-row justify-between items-center w-full text-h1 font-puffling'>
+			<div className='flex flex-col md:flex-row justify-between items-center w-full text-h1 font-gaya'>
 				<h2 className='text-black text-center'>{year || 'TFFB'}</h2>
 				<h2 className='text-primary text-center'>{title || 'TFFB'}</h2>
 				<h2 className='text-black text-center'>TFFB</h2>
