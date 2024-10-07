@@ -41,7 +41,7 @@ async function getFilmEvents() {
 		const data = await res.json();
 		return data.records;
 	} catch (error) {
-		console.log(error);
+		return [];
 	}
 }
 
@@ -60,7 +60,7 @@ async function getFilms() {
 		//console.log('data records', data.records[0]);
 		return data;
 	} catch (error) {
-		console.log(error);
+		return [];
 	}
 }
 
@@ -79,7 +79,7 @@ async function getEvents() {
 		//console.log('events', data.records)
 		return data.records;
 	} catch (error) {
-		console.log(error);
+		return [];
 	}
 }
 
@@ -96,10 +96,9 @@ async function getOthers() {
 			}
 		);
 		const data = await res.json();
-		// console.log('all others', data)
 		return data.records;
 	} catch (error) {
-		console.log(error);
+		return [];
 	}
 }
 
@@ -124,7 +123,6 @@ export default async function HomeView({ language }) {
 		film.fields['Events'] = eventsOfFilm;
 		allEvents = [...allEvents, ...eventsOfFilm, film];
 	}
-	console.log('all event count', allEvents.length);
 	const others = await getOthers();
 	const marquee = others
 		?.filter((data) => data.fields['Type'] === 'Donate-Float')
