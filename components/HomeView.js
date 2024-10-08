@@ -109,7 +109,7 @@ const Dynamicp5TestTwo = dynamic(() => import('./Testp5Two/Testp5Two'), {
 });
 
 export default async function HomeView({ language }) {
-	const otherEvents = (await getEvents()) || []; // Ensure otherEvents is an array
+	const otherEvents = await getEvents(); // Ensure otherEvents is an array
 	let allEvents = [
 		...(otherEvents?.filter((evt) => evt?.fields?.ShowInCalendar) || []), // Safeguard field access with optional chaining
 	];
