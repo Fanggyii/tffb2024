@@ -4,6 +4,8 @@ import LanguageSelect from './LanguageSelect';
 import Marquee from './Marquee';
 import Team from './Team';
 import { sectionTitles } from '../utils/helpers';
+import Image from 'next/image';
+import AboutImageSrc from '../assets/about-banner.png';
 
 const airtableApiKey = process.env.AIRTABLE_API_KEY;
 const airtableBaseId = process.env.AIRTABLE_BASE_ID;
@@ -51,10 +53,9 @@ export default async function AboutView({ language }) {
 				<h1 className='text-center text-h1 font-gaya text-primary'>
 					{sectionText.aboutUs}
 				</h1>
-				<img
-					src='../img/about-img.png'
-					className='block w-20 md:w-36 mx-auto my-24'
-				/>
+				<div className='relative w-[83.33%] h-24 md:w-[41.66%] md:h-[300px] my-24 mx-auto'>
+					<Image src={AboutImageSrc} className='absolute object-cover' fill />
+				</div>
 				<Team team={team} language={language} />
 				<Footer language={language} googleCalendar={GoogleCalendarUrl} />
 			</section>
