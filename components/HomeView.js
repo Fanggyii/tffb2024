@@ -114,16 +114,16 @@ export default async function HomeView({ language }) {
 		...(otherEvents?.filter((evt) => evt?.fields?.ShowInCalendar) || []), // Safeguard field access with optional chaining
 	];
 
-	let films = (await getFilms()) || {}; // Ensure films is an object
-	const filmEvents = (await getFilmEvents()) || []; // Ensure filmEvents is an array
+	let films = await getFilms(); // Ensure films is an object
+	const filmEvents = await getFilmEvents(); // Ensure filmEvents is an array
 
 	// Safely iterate over films.records
-	for (let film of films?.records || []) {
+	for (let film of films?.records) {
 		const filmId = film?.id; // Ensure film and film.id are valid
 		if (!filmId) continue; // Skip iteration if filmId is undefined
 
 		// Safely filter filmEvents
-		const eventsOfFilm = (filmEvents || []).filter(
+		const eventsOfFilm = filmEvents.filter(
 			(event) =>
 				event?.fields?.Film && // Ensure event.fields.Film exists
 				event.fields.Film[0] &&
@@ -138,12 +138,11 @@ export default async function HomeView({ language }) {
 		allEvents = [...allEvents, ...eventsOfFilm, film];
 	}
 
-	const others = (await getOthers()) || []; // Ensure others is an array
+	const others = await getOthers(); // Ensure others is an array
 
 	// Safeguard marquee processing
-	const marquee = (
-		others?.filter((data) => data?.fields?.['Type'] === 'Donate-Float') || []
-	)
+	const marquee = others
+		?.filter((data) => data?.fields?.['Type'] === 'Donate-Float')
 		.map((marquee) => marquee?.fields?.[`Title_${language}`] || '') // Handle missing fields
 		.join('');
 
@@ -151,7 +150,7 @@ export default async function HomeView({ language }) {
 	const sponsors = others
 		.filter((data) => data?.fields?.['Type'] === 'Sponsor')
 		.map((sponsor) => {
-			sponsor.fields = sponsor.fields || {}; // Ensure sponsor.fields exists
+			sponsor.fields = sponsor.fields; // Ensure sponsor.fields exists
 			sponsor.fields['Img'] = sponsor.fields['Img']
 				? dropboxUrl(sponsor.fields['Img'])
 				: 'hi';
@@ -162,7 +161,7 @@ export default async function HomeView({ language }) {
 	const partners = others
 		.filter((data) => data?.fields?.['Type'] === 'Partner')
 		.map((partner) => {
-			partner.fields = partner.fields || {}; // Ensure partner.fields exists
+			partner.fields = partner.fields; // Ensure partner.fields exists
 			partner.fields['Img'] = partner.fields['Img']
 				? dropboxUrl(partner.fields['Img'])
 				: 'hi';
@@ -170,38 +169,36 @@ export default async function HomeView({ language }) {
 		});
 
 	// Safeguard questions processing
-	const questions =
-		others?.filter((data) => data?.fields?.['Type'] === 'Question') || [];
+	const questions = others?.filter(
+		(data) => data?.fields?.['Type'] === 'Question'
+	);
 
 	// Safeguard websiteGlobal and ensure it exists before accessing fields
-	const websiteGlobal =
-		others.find((data) => data?.fields?.['Type'] === 'Website') || {};
-	const websiteGlobalFields = websiteGlobal?.fields || {};
+	const websiteGlobal = others.find(
+		(data) => data?.fields?.['Type'] === 'Website'
+	);
+	const websiteGlobalFields = websiteGlobal?.fields;
 
 	// Safeguard heroText generation
-	const heroText = websiteGlobalFields[`Title_${language}`]?.split('\n') || [];
+	const heroText = websiteGlobalFields[`Title_${language}`]?.split('\n');
 
 	// Safeguard destructuring and assign default values
-	const {
-		VenueLink = '',
-		TrailerLink = '',
-		GoogleCalendarUrl = '',
-	} = websiteGlobalFields;
+	const { VenueLink, TrailerLink, GoogleCalendarUrl } = websiteGlobalFields;
 
 	// Safeguard section titles and assign default values
-	const sectionText = sectionTitles[language] || {};
+	const sectionText = sectionTitles[language];
 	const {
-		filmSectionTitle = '',
-		aboutSectionTitle = '',
-		eventSectionTitle = '',
-		sponsorSectionTitle = '',
-		partnerSectionTitle = '',
-		questionSectionTitle = '',
+		filmSectionTitle,
+		aboutSectionTitle,
+		eventSectionTitle,
+		sponsorSectionTitle,
+		partnerSectionTitle,
+		questionSectionTitle,
 	} = sectionText;
 
-	const aboutThisYear =
-		others?.filter((data) => data?.fields?.['Type'] === 'About-This-Year') ||
-		[];
+	const aboutThisYear = others?.filter(
+		(data) => data?.fields?.['Type'] === 'About-This-Year'
+	);
 
 	return (
 		<div id='content' className='relative'>
