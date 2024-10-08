@@ -1,7 +1,11 @@
 'use client';
+
+import Image from 'next/image';
 import { useState } from 'react';
 import RichText from './RichText';
 import { sectionTitles } from '../utils/helpers';
+import AboutImageSrc from '../assets/about-banner.png';
+
 export default function Bank({ bank, language }) {
 	const Title = bank.fields[`Title_${language}`];
 	const Subtitle = bank.fields[`Subtitle_${language}`];
@@ -31,10 +35,9 @@ export default function Bank({ bank, language }) {
 			<h1 className='font-gaya font-medium text-h1 text-primary text-center my-8'>
 				{Title}
 			</h1>
-			<img
-				src='../img/about-img.png'
-				className='block w-20 md:w-36 mx-auto my-24'
-			/>
+			<div className='relative w-[83.33%] h-24 md:w-[41.66%] md:h-[300px] my-24 mx-auto'>
+				<Image src={AboutImageSrc} className='absolute object-cover' fill />
+			</div>
 			<div className='py-8'>
 				<RichText content={Content} />
 			</div>
