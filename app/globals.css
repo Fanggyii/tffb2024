@@ -113,9 +113,12 @@
 	background-color: #d6366f;
 }
 
+a {
+	transition: opacity 240ms ease-in;
+}
+
 a:hover {
-	color: #ccc;
-	cursor: pointer;
+	opacity: 0.6;
 }
 
 .richtext {
