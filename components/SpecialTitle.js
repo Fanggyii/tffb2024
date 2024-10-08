@@ -6,7 +6,7 @@ export default function SpecialTitle(props) {
 
 	return (
 		<div className='flex flex-col gap-10'>
-			<div className='flex flex-col md:flex-row justify-between items-center w-full font-special text-h1'>
+			<div className='flex flex-col md:flex-row justify-between items-center w-full font-gaya text-h1'>
 				<h2 className='font-gaya text-black text-center'>{year || 'TFFB'}</h2>
 				<h2 className='font-gaya text-primary text-center'>
 					{title || 'TFFB'}
