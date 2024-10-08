@@ -174,7 +174,7 @@ export default async function HomeView({ language }) {
 				<div className='py-10 mix-blend text-shadow'>
 					{/*<Dynamicp5TestTwo /> */}
 					<h1
-						className={`text-center text-h1 font-special text-primary ${
+						className={`text-center text-h1 font-puffling text-primary ${
 							language === 'tw' ? 'font-semibold' : ''
 						}`}
 					>
@@ -182,7 +182,7 @@ export default async function HomeView({ language }) {
 					</h1>
 					{heroText.map((text, i) => (
 						<h1
-							className={`text-center text-h1 font-special ${
+							className={`text-center text-h1 font-puffling ${
 								language === 'tw' && i === 0 ? 'font-semibold' : ''
 							}`}
 						>
