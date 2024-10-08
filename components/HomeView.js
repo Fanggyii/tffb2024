@@ -174,20 +174,20 @@ export default async function HomeView({ language }) {
 				<div className='py-10 mix-blend text-shadow'>
 					{/*<Dynamicp5TestTwo /> */}
 					<h1
-						className={`text-center text-h1 font-special text-primary ${
+						className={`text-center text-h1 font-puffling text-primary ${
 							language === 'tw' ? 'font-semibold' : ''
 						}`}
 					>
 						{websiteGlobalFields[`Theme_${language}`]}
 					</h1>
 					{heroText.map((text, i) => (
-						<h1
-							className={`text-center text-h1 font-special ${
+						<h2
+							className={`text-center text-h1 font-puffling ${
 								language === 'tw' && i === 0 ? 'font-semibold' : ''
 							}`}
 						>
 							{text}
-						</h1>
+						</h2>
 					))}
 				</div>
 				<div className='text-center z-50'>
@@ -210,7 +210,7 @@ export default async function HomeView({ language }) {
 				<div>
 					{aboutThisYear?.map((obj) => (
 						<div key={obj.id} className='my-4'>
-							<h2 className='text-center font-special text-h2 font-semibold mb-2'>
+							<h2 className='text-center font-gaya text-h2 font-semibold mb-2'>
 								{obj.fields[`Question_${language}`]}
 							</h2>
 							<div>

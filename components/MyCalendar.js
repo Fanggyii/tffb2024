@@ -93,7 +93,7 @@ export default function MyCalendar({ events, language }) {
     };
 
     return (
-        <div className={`mt-[6rem] font-special`}>
+        <div className={`mt-[6rem] font-gaya`}>
             <Calendar
                 localizer={localizer}
                 events={myEventList}
