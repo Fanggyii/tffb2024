@@ -1,3 +1,5 @@
+'use client';
+
 import LanguageSelect from './LanguageSelect';
 import Marquee from './Marquee';
 import Modal from './Modal';
